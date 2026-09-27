@@ -49,6 +49,9 @@ public class Pedido {
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pizza> pizzas = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ItemBebida> bebidas = new ArrayList<>();
 }
 
 

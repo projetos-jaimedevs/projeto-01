@@ -18,21 +18,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "itens_sabor")
-public class ItemSabor {
-	
+@Table(name = "itens_bebida")
+public class ItemBebida {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pizza_id", nullable = false)
-	private Pizza pizza;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sabor_id", nullable = false)
-	private Sabor sabor;
-	
 	private BigDecimal valorItem;
+	private Integer quantidade;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pedido_id", nullable = false)
+	private Pedido pedido;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bebida_id", nullable = false)
+	private Bebida bebida;
 }
