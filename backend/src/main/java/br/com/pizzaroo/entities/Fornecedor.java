@@ -1,6 +1,5 @@
 package br.com.pizzaroo.entities;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,23 +18,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ingredientes")
-public class Ingrediente {
-
+@Table(name = "fornecedores")
+public class Fornecedor {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(nullable = false)
-	private String descricao;
-	private String unidade;
-	private BigDecimal quantidade;
-	private BigDecimal quantidadeMinima;
-
-	@OneToMany(mappedBy = "ingrediente")
-	private List<ItemIngrediente> itens = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "ingrediente")
-    private List<ItemCompraIngrediente> compras = new ArrayList<>();
-
+	@Column(nullable = false)
+	private String nome;
+	
+	private String telefone;
+	
+	private String email;
+	
+	@OneToMany(mappedBy = "fornecedor")
+	private List<Compra> compras = new ArrayList<>();
 }
