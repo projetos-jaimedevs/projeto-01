@@ -8,6 +8,7 @@ public class PizzarooApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PizzarooApplication.class, args);
+				
 	}
 
 }
