@@ -1,7 +1,6 @@
 package br.com.pizzaroo.entities;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,33 +11,27 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "pedidos")
-public class Pedido {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class Pedido  extends TenantEntity {
 	
 	@Column(nullable = false, unique = true)
 	private Long numeroPedido;	
 	
-	private LocalTime horaPedido;
-	private LocalDate dataPedido;
+	private LocalDateTime dataHoraPedido;
 	
 	@Enumerated(EnumType.STRING)
 	private SituacaoPedido situacaoPedido;
@@ -52,6 +45,14 @@ public class Pedido {
 	
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemBebida> bebidas = new ArrayList<>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "funcionario_preparacao_id")
+	private Funcionario funcionarioPreparacao;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "funcionario_entrega_id")
+	private Funcionario funcionarioEntrega;
 }
 
 
